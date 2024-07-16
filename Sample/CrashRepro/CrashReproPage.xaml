@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:crashRepro="clr-namespace:Sample.CrashRepro"
+    xmlns:virtualizeListView="clr-namespace:MPowerKit.VirtualizeListView;assembly=MPowerKit.VirtualizeListView"
+    x:Class="Sample.CrashRepro.CrashReproPage"
+    x:DataType="crashRepro:CrashReproViewModel">
+    <Grid
+        RowDefinitions="Auto,*">
+        <SearchBar 
+            Grid.Row="0"
+            Text="{Binding Query}"
+            BackgroundColor="White" />
+        
+        <virtualizeListView:VirtualizeListView
+            Grid.Row="1"
+            ItemsSource="{Binding Items}">
+            <virtualizeListView:VirtualizeListView.ItemTemplate>
+                <DataTemplate x:DataType="crashRepro:CrashReproItem">
+                    <virtualizeListView:VirtualizeListViewCell>
+                        <Border
+                            Margin="16,8"
+                            Padding="16"
+                            Stroke="Black"
+                            StrokeShape="RoundRectangle 16">
+                            <Grid
+                                ColumnSpacing="16"
+                                ColumnDefinitions="80,*,80">
+                                <Image 
+                                    Grid.Column="0"
+                                    HeightRequest="{Binding Height}"
+                                    Source="{Binding ImageUrl}" />
+                                
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    Spacing="8">
+                                    <Label 
+                                        Text="{Binding Title}"
+                                        TextColor="Black"
+                                        FontSize="20" />
+                                
+                                    <Label 
+                                        Text="{Binding Description}"
+                                        TextColor="Gray"
+                                        FontSize="14" />
+                                </VerticalStackLayout>
+                                
+                                <Image 
+                                    Grid.Column="2"
+                                    HeightRequest="{Binding Height}"
+                                    Source="{Binding ImageUrl}" />
+                            </Grid>
+                        </Border>
+                    </virtualizeListView:VirtualizeListViewCell>
+                </DataTemplate>
+            </virtualizeListView:VirtualizeListView.ItemTemplate>
+        </virtualizeListView:VirtualizeListView>
+    </Grid>
+</ContentPage>
